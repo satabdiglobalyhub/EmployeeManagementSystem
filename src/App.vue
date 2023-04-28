@@ -1,14 +1,14 @@
 <template>
-  <HomePage />
+  <router-view />
 </template>
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
-import HomePage from "./components/HomePage.vue";
+import LoginPage from "./components/LoginPage.vue";
 
 export default {
   components: {
-    HomePage,
+    LoginPage,
   },
 };
 </script>
