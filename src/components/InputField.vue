@@ -1,5 +1,9 @@
-<template>
-  <input :placeholder="placeholderText" v-model="inputValue" class="border-2 rounded p-3" />
+<template class="flex flex-col">
+  <input
+    :placeholderText="placeholderText"
+    v-model="inputValue"
+    class="border-2 rounded p-3 w-full"
+  />
 </template>
 
 <script>
@@ -16,6 +20,9 @@ export default {
     },
   },
   methods: {
+    beforeCreate() {
+      console.log(this.props);
+    },
     clearInput() {
       this.inputValue = "";
     },
