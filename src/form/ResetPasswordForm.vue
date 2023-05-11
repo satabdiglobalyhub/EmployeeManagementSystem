@@ -10,13 +10,23 @@
     <div class="py-2 text-slate-500 flex flex-col gap-2">
       Create new password
       <PasswordField v-model="password.new" />
-
-      Password must have atleast 8 characters,1 lowercase,1 uppercase, 1 number
-      and 1 special character
+      <div class="flex" :class="{ 'text-red-500': !passwordFormatMatch }">
+        <img
+          v-if="!passwordFormatMatch"
+          src="../assets/WarningIcon.svg"
+          class="pr-1"
+        />
+        Password must have atleast 8 characters,1 lowercase,1 uppercase, 1
+        number and 1 special character
+      </div>
     </div>
     <div class="flex flex-col gap-2 text-slate-500">
       Re-enter new password
       <PasswordField v-model="password.confirm" />
+    </div>
+    <div v-if="!passwordMatch" class="flex pt-2 text-red-600">
+      <img src="../assets/WarningIcon.svg" class="pr-1" />
+      The password you entered do not match.
     </div>
 
     <button
@@ -32,13 +42,14 @@
 import PasswordField from "../components/PasswordField.vue";
 import CompanyHeaderLogo from "../components/CompanyHeaderLogo.vue";
 import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+import { required, sameAs } from "@vuelidate/validators";
 
 export default {
   components: {
     PasswordField,
     CompanyHeaderLogo,
   },
+  emits: ["resetPasswordSuccess"],
   data() {
     return {
       v$: useVuelidate(),
@@ -46,6 +57,8 @@ export default {
         new: "",
         confirm: "",
       },
+      passwordMatch: true,
+      passwordFormatMatch: true,
     };
   },
   validations() {
@@ -59,7 +72,7 @@ export default {
         },
         confirm: {
           required,
-          passwordFormat: (value) => passwordFormat.test(value),
+          sameAs: (value) => value === this.password.new,
         },
       },
     };
@@ -67,10 +80,15 @@ export default {
   methods: {
     async resetPassword() {
       const result = await this.v$.$validate();
+      if (this.password.new != this.password.confirm) {
+        this.passwordMatch = false;
+      } else if (this.password.new == this.password.confirm) {
+        this.passwordMatch = true;
+      }
       if (result) {
-        alert("Form successfully submitted");
-      } else {
-        alert("Failed Form Validation");
+        this.$emit("resetPasswordSuccess");
+      } else if (!result) {
+        this.passwordFormatMatch = false;
       }
     },
   },

@@ -11,7 +11,8 @@
       </div>
 
       <label class="mt-4 mb-2">Password</label>
-      <PasswordField />
+      <PasswordField v-model="password" />
+
       <div v-if="v$.password.$error" class="flex pt-2 text-red-600">
         <img src="../assets/WarningIcon.svg" class="pr-1" />
         Incorrect password. Try again or click Forgot Password to reset it.
