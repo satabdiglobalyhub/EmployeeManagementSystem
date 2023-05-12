@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border-b-2">
     <CompanyHeaderLogo />
   </div>
   <div class="flex flex-col">

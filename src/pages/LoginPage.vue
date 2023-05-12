@@ -3,7 +3,9 @@
     <div class="flex justify-center items-center h-screen">
       <div class="relative bg-white w-2/4 py-12 px-20 drop-shadow-xl">
         <div v-if="noRecoveryLinkNeeded">
+          <div class="border-b-2">
           <CompanyHeaderLogo />
+        </div>
           <main class="flex flex-col gap-4">
             <div v-if="rememberedPassword">
               <LoginForm @rememberedPassword="toggleRememberedPassword" />

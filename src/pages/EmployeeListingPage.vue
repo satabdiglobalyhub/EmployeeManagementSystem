@@ -1,15 +1,11 @@
 <template>
   <section class="flex justify-around">
-    <div class="flex flex-col justify-center">
-      <img src="../assets/companyLogo.svg" alt="CompanyLogo" class="h-11" />
-      <div class="flex flex-col items-center">
-        <div>IntroCept Employee</div>
-        <div>Portal</div>
-      </div>
+    <div class="p-2">
+      <CompanyHeaderLogo />
     </div>
-    <div class="flex items-center gap-2">
-      <div>DP</div>
-      <div>Name</div>
+    <div class="flex items-center gap-4">
+      <div class="mt-5">DP</div>
+      <div class="mt-5">Satabdi Gautam</div>
 
       <RouterLink
         :to="{ name: 'LoginPage' }"
@@ -20,6 +16,7 @@
       </RouterLink>
     </div>
   </section>
+
   <section class="bg-slate-100 h-screen">
     <header class="flex justify-between">
       <div class="flex gap-x-2">
@@ -36,9 +33,10 @@
       </div>
     </header>
     <body>
-        <table></table>
+      <EmployeeTable :data="users"/>
     </body>
-    <footer>
+
+    <footer class="flex">
       <div>backlogo</div>
       <div>Prev</div>
       <div>1</div>
@@ -51,3 +49,23 @@
     </footer>
   </section>
 </template>
+
+<script>
+import CompanyHeaderLogo from "../components/CompanyHeaderLogo.vue";
+import EmployeeTable from "../components/EmployeeTable.vue";
+export default {
+  components: {
+    CompanyHeaderLogo,
+    EmployeeTable,
+  },
+  data() {
+    return {
+      users: [
+        { id: 1, name: "John Doe", email: "john@example.com" },
+        { id: 2, name: "Jane Smith", email: "jane@example.com" },
+        { id: 3, name: "Bob Johnson", email: "bob@example.com" },
+      ],
+    };
+  },
+};
+</script>

@@ -1,5 +1,7 @@
 <template>
-  <CompanyHeaderLogo />
+  <div class="border-b-2">
+    <CompanyHeaderLogo />
+  </div>
   <div class="flex flex-col gap-10 py-6">
     <div class="font-bold text-3xl mt-4">Password Reset Successfull</div>
     <div class="text-slate-500">
