@@ -4,8 +4,8 @@
       <div class="relative bg-white w-2/4 py-12 px-20 drop-shadow-xl">
         <div v-if="noRecoveryLinkNeeded">
           <div class="border-b-2">
-          <CompanyHeaderLogo />
-        </div>
+            <CompanyHeaderLogo />
+          </div>
           <main class="flex flex-col gap-4">
             <div v-if="rememberedPassword">
               <LoginForm @rememberedPassword="toggleRememberedPassword" />
@@ -48,7 +48,7 @@
 
 <script>
 import InputField from "../components/InputField.vue";
-import LoginForm from "../form/loginForm.vue";
+import LoginForm from "../form/LoginForm.vue";
 import CompanyHeaderLogo from "../components/CompanyHeaderLogo.vue";
 import ForgotPasswordForm from "../form/ForgotPasswordForm.vue";
 import VerifyEmailForm from "../form/VerifyEmailForm.vue";

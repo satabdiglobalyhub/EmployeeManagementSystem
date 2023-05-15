@@ -19,13 +19,5 @@ export default {
       default: "Input Data",
     },
   },
-  methods: {
-    beforeCreate() {
-      console.log(this.props);
-    },
-    clearInput() {
-      this.inputValue = "";
-    },
-  },
 };
 </script>
