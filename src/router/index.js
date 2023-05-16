@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
+
 import LoginPage from "../pages/LoginPage.vue";
 import EmployeeListingPage from "../pages/EmployeeListingPage.vue";
+
 import PageNotFound from "../PageNotFound.vue";
 
 const router = createRouter({

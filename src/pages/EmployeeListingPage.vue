@@ -1,7 +1,7 @@
 <template>
   <section class="flex justify-around">
-    <div class=" h-32" style="transform: scale(0.7);">
-      <CompanyHeaderLogo/>
+    <div class="h-32" style="transform: scale(0.7)">
+      <CompanyHeaderLogo />
     </div>
     <div class="flex items-center gap-4">
       <div class="mt-5 w-12"><img src="../assets/DisplayPicture.jpg" /></div>
@@ -19,7 +19,7 @@
 
   <section class="bg-slate-100 w-full h-screen">
     <div class="flex justify-center pt-8">
-      <div class="relative bg-white w-3/4 py-12 px-20 drop-shadow-xl">
+      <div class="relative bg-white w-3/4 pt-12 pb-4 px-20 drop-shadow-xl">
         <header class="flex justify-between">
           <div class="flex flex-col gap-x-2 justify-between">
             <div class="flex gap-4">
@@ -67,18 +67,6 @@
         <body class="mt-10">
           <EmployeeTable :data="usersData" />
         </body>
-
-        <footer class="flex">
-          <div>backlogo</div>
-          <div>Prev</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>Next</div>
-          <div>nextlogo</div>
-        </footer>
       </div>
     </div>
   </section>
@@ -89,19 +77,23 @@ import CompanyHeaderLogo from "../components/CompanyHeaderLogo.vue";
 import EmployeeTable from "../components/EmployeeTable.vue";
 import InputField from "../components/InputField.vue";
 
+
 export default {
   components: {
     CompanyHeaderLogo,
     EmployeeTable,
     InputField,
+ 
   },
   data() {
     return {
-      usersData: {},
+      usersData: [],
       employeeCount: "",
       employeeName: "",
+      
     };
   },
+
   methods: {
     async fetchEmployeeData() {
       const res = await fetch(
