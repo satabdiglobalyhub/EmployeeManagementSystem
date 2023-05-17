@@ -24,9 +24,12 @@
         <td>{{ employee.status }}</td>
         <td>{{ employee.team }}</td>
         <td>
-          <select class="border rounded shadow text-indigo-600">
-            <option class="">View Details</option>
-            <option>Set as Alumni</option>
+          <select
+            class="border rounded shadow text-indigo-600"
+            @change="updateStatus(employee, $event.target.value)"
+          >
+            <option value="default">View Details</option>
+            <option value="alumni">Set as Alumni</option>
           </select>
         </td>
       </tr>
@@ -88,6 +91,12 @@ export default {
     },
     nextPage() {
       this.currentPage += 1;
+    },
+    updateStatus(employee, value) {
+      if (value === "alumni") {
+        employee.status = !employee.status;
+        event.target.value = "default";
+      }
     },
   },
 };

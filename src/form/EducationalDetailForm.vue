@@ -1,0 +1,3 @@
+<template>
+    Educational Details
+</template>
