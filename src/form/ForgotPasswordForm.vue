@@ -40,7 +40,7 @@ export default {
       email: "",
     };
   },
-  emits: ["isRecoveryLinkNeeded",'email'],
+  emits: ["isRecoveryLinkNeeded", "email"],
   setup() {
     return { v$: useVuelidate() };
   },

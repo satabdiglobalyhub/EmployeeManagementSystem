@@ -10,15 +10,66 @@
     </button>
   </header>
   <section>
-    <div class="flex justify-between mt-6 text-xl text-indigo-600">
-      <div>Personal Details</div>
-      <div>Educational Details</div>
-      <div>Key Employment Details</div>
+    <div class="flex justify-start gap-7 mt-6 text-xl text-indigo-600">
+      <div
+        :class="{
+          'bg-indigo-600': PersonalDetail,
+          'text-white': PersonalDetail,
+          rounded: PersonalDetail,
+          'p-1': PersonalDetail,
+        }"
+      >
+        Personal Details
+      </div>
+      <div
+        :class="{
+          'bg-indigo-600': !PersonalDetail && EducationalDetail,
+          'text-white': !PersonalDetail && EducationalDetail,
+          rounded: !PersonalDetail && EducationalDetail,
+          'p-1': !PersonalDetail && EducationalDetail,
+        }"
+      >
+        Educational Details
+      </div>
+      <div
+        :class="{
+          'bg-indigo-600': !PersonalDetail && !EducationalDetail,
+          'text-white': !PersonalDetail && !EducationalDetail,
+          rounded: !PersonalDetail && !EducationalDetail,
+          'p-1': !PersonalDetail && !EducationalDetail,
+        }"
+      >
+        Key Employment Details
+      </div>
     </div>
     <div>
-      <div><PersonalDetailForm /></div>
-      <div><EducationalDetailForm /></div>
-      <div><KeyEmploymentDetail /></div>
+      <div v-if="PersonalDetail">
+        <PersonalDetailForm
+          @addEmployee="backToList"
+          @addPersonalDetail="gotoEducationDetails"
+          @checkValidation="gotoEducationDetails"
+        />
+      </div>
+      <div v-if="!PersonalDetail && EducationalDetail">
+        <EducationalDetailForm
+          @addEducationalDetail="gotoKeyEmplomentDetails"
+          @checkValidation="gotoKeyEmplomentDetails"
+        />
+      </div>
+      <div v-if="!PersonalDetail && !EducationalDetail">
+        <KeyEmploymentDetail />
+      </div>
+    </div>
+    <div class="flex justify-end gap-6 border-t-2 p-4">
+      <button @click="backToList" class="bg-slate-100 p-2 border rounded">
+        Cancel
+      </button>
+      <button
+        @click="detailsEntered"
+        class="bg-indigo-600 text-white p-2 border rounded"
+      >
+        Save and Countinue
+      </button>
     </div>
   </section>
 </template>
@@ -29,7 +80,13 @@ import EducationalDetailForm from "./EducationalDetailForm.vue";
 import KeyEmploymentDetail from "./KeyEmploymentDetail.vue";
 
 export default {
-  emits: ["addEmployee"],
+  emits: ["addEmployee", "addPersonalDetail"],
+  data() {
+    return {
+      PersonalDetail: true,
+      EducationalDetail: true,
+    };
+  },
   components: {
     PersonalDetailForm,
     EducationalDetailForm,
@@ -38,6 +95,15 @@ export default {
   methods: {
     backToList() {
       this.$emit("addEmployee", false);
+    },
+    gotoEducationDetails() {
+      this.PersonalDetail = false;
+    },
+    gotoKeyEmplomentDetails() {
+      this.EducationalDetail = false;
+    },
+    detailsEntered() {
+      console.log("entered");
     },
   },
 };

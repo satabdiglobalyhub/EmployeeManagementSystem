@@ -17,7 +17,7 @@
     </div>
   </section>
 
-  <section class="bg-slate-100 w-full h-screen">
+  <section class="bg-slate-100 w-full h-max">
     <div class="flex justify-center pt-8">
       <div
         class="relative bg-white w-3/4 pt-12 pb-4 px-20 drop-shadow-xl border rounded"
@@ -74,7 +74,7 @@
           </body>
         </div>
         <div v-if="addEmployee">
-          <AddEmployeeForm @addEmployee="toggleAddEmployee" />
+          <AddEmployeeForm @addEmployee="toggleAddEmployee"  />
         </div>
       </div>
     </div>
@@ -101,6 +101,7 @@ export default {
       employeeCount: "",
       employeeName: "",
       addEmployee: false,
+    
     };
   },
 
@@ -125,6 +126,7 @@ export default {
     toggleAddEmployee() {
       this.addEmployee = !this.addEmployee;
     },
+   
   },
   mounted() {
     this.fetchEmployeeData();
