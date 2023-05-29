@@ -57,10 +57,13 @@
         />
       </div>
       <div v-if="!PersonalDetail && !EducationalDetail">
-        <KeyEmploymentDetail />
+        <KeyEmploymentDetail 
+        @addKeyEmploymentDetail="backToList"
+        @checkValidation="backToList"
+        />
       </div>
     </div>
-    <div class="flex justify-end gap-6 border-t-2 p-4">
+    <div class="flex justify-end gap-6 mt-4 border-t-2 p-4">
       <button @click="backToList" class="bg-slate-100 p-2 border rounded">
         Cancel
       </button>

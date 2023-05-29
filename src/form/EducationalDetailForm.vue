@@ -51,13 +51,13 @@
     </div>
   </div>
 
-  <!-- <button
+  <button
     class="text-indigo-600 my-5 border-2 rounded flex items-center gap-2 p-2 shadow-lg"
     @click="addEducationDetailForm"
   >
     <img class="bg-indigo-600" src="../assets/AddIcon.svg" />
     Add More
-  </button> -->
+  </button>
 </template>
 
 <script>
@@ -111,6 +111,7 @@ export default {
       this.educationCount++;
     },
     deleteEducationDetailForm(index) {
+      
       console.log("deletedForm", index);
     },
     async educationalDetailsEntered() {

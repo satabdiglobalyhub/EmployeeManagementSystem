@@ -25,7 +25,7 @@
         <div v-if="!addEmployee">
           <header class="flex justify-between">
             <div class="flex flex-col gap-x-2 justify-between">
-              <div class="flex gap-4">
+              <div class="flex gap-4 mt-3">
                 <div class="text-2xl">EMPLOYEES</div>
                 <select class="border rounded shadow text-indigo-600">
                   <option>All</option>

@@ -3,14 +3,14 @@
     <thead>
       <tr>
         <th class="flex">Full Name/Email</th>
-        <th>Designation</th>
+        <th class="pl-5">Designation</th>
         <th>Phone</th>
         <th>Status</th>
         <th>Team</th>
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
       <tr v-for="(employee, index) in displayedEmployees" :key="employee.id">
         <div class="flex gap-3 mt-3">
           <img src="../assets/defaultEmployeePicture.svg" />
@@ -19,11 +19,11 @@
             <td class="text-indigo-600">{{ employee.email }}</td>
           </div>
         </div>
-        <td>{{ employee.designation }}</td>
-        <td>{{ employee.phone }}</td>
-        <td>{{ employee.status }}</td>
-        <td>{{ employee.team }}</td>
-        <td>
+        <td class="pl-5 text-center">{{ employee.designation }}</td>
+        <td class="pl-4 ">{{ employee.phone }}</td>
+        <td class="pl-2">{{ employee.status }}</td>
+        <td class="pl-2">{{ employee.team }}</td>
+        <td class="pl-2">
           <select
             class="border rounded shadow text-indigo-600"
             @change="updateStatus(employee, $event.target.value)"
