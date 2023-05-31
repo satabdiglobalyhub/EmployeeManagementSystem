@@ -10,7 +10,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody >
+    <tbody>
       <tr v-for="(employee, index) in displayedEmployees" :key="employee.id">
         <div class="flex gap-3 mt-3">
           <img src="../assets/defaultEmployeePicture.svg" />
@@ -20,15 +20,16 @@
           </div>
         </div>
         <td class="pl-5 text-center">{{ employee.designation }}</td>
-        <td class="pl-4 ">{{ employee.phone }}</td>
+        <td class="pl-4">{{ employee.phone }}</td>
         <td class="pl-2">{{ employee.status }}</td>
         <td class="pl-2">{{ employee.team }}</td>
         <td class="pl-2">
           <select
             class="border rounded shadow text-indigo-600"
-            @change="updateStatus(employee, $event.target.value)"
+            @change="handleOptionChange(employee, $event.target.value)"
           >
-            <option value="default">View Details</option>
+            <option value="default">Select Actions</option>
+            <option value="details">View Details</option>
             <option value="alumni">Set as Alumni</option>
           </select>
         </td>
@@ -75,6 +76,7 @@ export default {
       currentPage: 1,
     };
   },
+  emits: ["viewDetails"],
   computed: {
     displayedEmployees() {
       const startIndex = (this.currentPage - 1) * this.pageSize;
@@ -91,6 +93,16 @@ export default {
     },
     nextPage() {
       this.currentPage += 1;
+    },
+    handleOptionChange(employee, value) {
+      if (value === "details") {
+        this.toggleEmployeeDetails(employee);
+      } else if (value === "alumni") {
+        this.updateStatus(employee, value);
+      }
+    },
+    toggleEmployeeDetails(employee) {
+      this.$emit("viewDetails", employee);
     },
     updateStatus(employee, value) {
       if (value === "alumni") {

@@ -17,7 +17,7 @@
     </div>
   </section>
 
-  <section class="bg-slate-100 w-full h-screen">
+  <section v-if="!viewEmployeeDetails" class="bg-slate-100 w-full h-screen">
     <div class="flex justify-center pt-8">
       <div
         class="relative bg-white w-3/4 pt-12 pb-4 px-20 drop-shadow-xl border rounded"
@@ -72,17 +72,27 @@
           </header>
 
           <body class="mt-10">
-            <EmployeeTable :data="usersData" />
+            <EmployeeTable
+              :data="usersData"
+              @viewDetails="toggleEmployeeDetails"
+            />
           </body>
         </div>
         <div v-if="addEmployee">
           <AddEmployeeForm @addEmployee="toggleAddEmployee" />
         </div>
         <div v-if="importFromExcel">
-          <ImportFromExcel @importEmployee="toggleImportFromExel"/>
+          <ImportFromExcel @importEmployee="toggleImportFromExel" />
         </div>
       </div>
     </div>
+  </section>
+
+  <section v-else-if="viewEmployeeDetails">
+    <ViewEmployeeDetails
+      :data="selectedEmployee"
+      @viewEmployee="toggleViewEmployee"
+    />
   </section>
 </template>
 
@@ -92,6 +102,7 @@ import EmployeeTable from "../components/EmployeeTable.vue";
 import InputField from "../components/InputField.vue";
 import AddEmployeeForm from "../form/AddEmployeeForm.vue";
 import ImportFromExcel from "../form/ImportFromExcel.vue";
+import ViewEmployeeDetails from "../pages/ViewEmployeeDetails.vue";
 
 export default {
   components: {
@@ -100,6 +111,7 @@ export default {
     InputField,
     AddEmployeeForm,
     ImportFromExcel,
+    ViewEmployeeDetails,
   },
   data() {
     return {
@@ -109,6 +121,8 @@ export default {
       employeeName: "",
       addEmployee: false,
       importFromExcel: false,
+      viewEmployeeDetails: false,
+      selectedEmployee: "",
     };
   },
 
@@ -132,9 +146,17 @@ export default {
     },
     toggleAddEmployee() {
       this.addEmployee = !this.addEmployee;
+      this.importFromExcel = false;
     },
     toggleImportFromExel() {
       this.importFromExcel = !this.importFromExcel;
+    },
+    toggleEmployeeDetails(employee) {
+      this.viewEmployeeDetails = !this.viewEmployeeDetails;
+      this.selectedEmployee = employee;
+    },
+    toggleViewEmployee() {
+      this.viewEmployeeDetails = !this.viewEmployeeDetails;
     },
   },
   mounted() {
